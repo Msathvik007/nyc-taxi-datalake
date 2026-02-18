@@ -53,6 +53,7 @@ resource "aws_glue_job" "job_b" {
   default_arguments = merge(
     local.common_default_arguments,
     {
+      "--PROJECT_PREFIX"            = var.project_prefix
       "--additional-python-modules" = "fuzzywuzzy==0.18.0,python-Levenshtein==0.25.1"
     }
   )
