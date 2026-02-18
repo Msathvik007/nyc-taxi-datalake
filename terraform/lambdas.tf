@@ -27,6 +27,12 @@ resource "aws_lambda_function" "master_data_frehness" {
   filename         = data.archive_file.master_data_frehness_zip.output_path
   source_code_hash = data.archive_file.master_data_frehness_zip.output_base64sha256
   tags             = var.tags
+
+  environment {
+    variables = {
+      PROJECT_PREFIX = var.project_prefix
+    }
+  }
 }
 
 resource "aws_lambda_function" "redshift_runner" {
