@@ -25,11 +25,11 @@ from awsglue.utils import getResolvedOptions
 
 args = getResolvedOptions(
     sys.argv,
-    ["JOB_NAME", "BUCKET", "run_id"]  # required
+    ["JOB_NAME", "BUCKET", "run_id", "PROJECT_PREFIX"]  # required
 )
 BUCKET = args["BUCKET"]
 RUN_ID = args["run_id"]
-PROJECT_PREFIX = "project_step_fuunction"
+PROJECT_PREFIX = args["PROJECT_PREFIX"]
 
 # optional args
 SNS_TOPIC_ARN = None
