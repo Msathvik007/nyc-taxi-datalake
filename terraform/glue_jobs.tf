@@ -26,7 +26,12 @@ resource "aws_glue_job" "job_a" {
     python_version  = "3"
   }
 
-  default_arguments = local.common_default_arguments
+  default_arguments = merge(
+    local.common_default_arguments,
+    {
+      "--PROJECT_PREFIX" = var.project_prefix
+    }
+  )
 }
 
 resource "aws_glue_job" "job_b" {
