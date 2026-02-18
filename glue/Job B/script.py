@@ -16,7 +16,7 @@ from pyspark.sql.window import Window
 # -----------------------------
 # Glue bootstrap
 # -----------------------------
-args = getResolvedOptions(sys.argv, ["JOB_NAME", "BUCKET"])
+args = getResolvedOptions(sys.argv, ["JOB_NAME", "BUCKET", "PROJECT_PREFIX"])
 
 sc = SparkContext.getOrCreate()
 glueContext = GlueContext(sc)
@@ -69,7 +69,7 @@ def add_master_audit_cols(df, created_by: str, approved_by: str, version: int):
 # Config
 # -----------------------------
 BUCKET = args["BUCKET"].strip()  # protect against accidental leading/trailing spaces
-PROJECT_PREFIX = "project_step_fuunction"
+PROJECT_PREFIX = args["PROJECT_PREFIX"]
 
 # Optional run_id param
 run_id = None

@@ -4,7 +4,7 @@ import os
 
 s3 = boto3.client("s3")
 
-PROJECT_PREFIX = os.environ.get("PROJECT_PREFIX", "project_step_fuunction")
+PROJECT_PREFIX = os.environ.get("PROJECT_PREFIX", "project_step__function")
 DEFAULT_THRESHOLD = float(os.environ.get("DEFAULT_THRESHOLD", "0.7"))
 
 def handler(event, context):
@@ -27,5 +27,8 @@ def handler(event, context):
         "quality_score": score,
         "pass": score >= threshold
     }
+
+def lambda_handler(event, context):
+    return handler(event, context)
 
 

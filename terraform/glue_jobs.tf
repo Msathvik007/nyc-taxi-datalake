@@ -26,7 +26,12 @@ resource "aws_glue_job" "job_a" {
     python_version  = "3"
   }
 
-  default_arguments = local.common_default_arguments
+  default_arguments = merge(
+    local.common_default_arguments,
+    {
+      "--PROJECT_PREFIX" = var.project_prefix
+    }
+  )
 }
 
 resource "aws_glue_job" "job_b" {
@@ -48,6 +53,7 @@ resource "aws_glue_job" "job_b" {
   default_arguments = merge(
     local.common_default_arguments,
     {
+      "--PROJECT_PREFIX"            = var.project_prefix
       "--additional-python-modules" = "fuzzywuzzy==0.18.0,python-Levenshtein==0.25.1"
     }
   )
@@ -69,5 +75,10 @@ resource "aws_glue_job" "job_c" {
     python_version  = "3"
   }
 
-  default_arguments = local.common_default_arguments
+  default_arguments = merge(
+    local.common_default_arguments,
+    {
+      "--PROJECT_PREFIX" = var.project_prefix
+    }
+  )
 }

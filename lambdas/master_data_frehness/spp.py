@@ -1,10 +1,12 @@
 import json
 import boto3
+import os
 from datetime import datetime, timezone
 
 s3 = boto3.client("s3")
 sns = boto3.client("sns")
 
+PROJECT_PREFIX = os.environ.get("PROJECT_PREFIX", "project_step__function")
 
 def parse_ts(ts: str) -> datetime:
     return datetime.fromisoformat(ts.replace("Z", "+00:00"))
@@ -16,7 +18,7 @@ def lambda_handler(event, context):
     thresholds = event.get("thresholds", {})
     sns_topic_arn = event.get("sns_topic_arn")
 
-    summary_key = f"project_step_fuunction/audit/run_summaries/{run_id}/jobB_summary.json"
+    summary_key = f"{PROJECT_PREFIX}/audit/run_summaries/{run_id}/jobB_summary.json"
 
     # --- Load Job B summary ---
     try:

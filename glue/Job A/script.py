@@ -15,7 +15,7 @@ from pyspark.sql import functions as F
 # -----------------------------
 # Job args
 # -----------------------------
-args = getResolvedOptions(sys.argv, ["JOB_NAME", "BUCKET"])
+args = getResolvedOptions(sys.argv, ["JOB_NAME", "BUCKET", "PROJECT_PREFIX"])
 
 sc = SparkContext.getOrCreate()
 glueContext = GlueContext(sc)
@@ -52,7 +52,7 @@ def put_json_to_s3(s3_uri: str, payload: dict):
 # Config
 # -----------------------------
 BUCKET = args["BUCKET"]
-PROJECT_PREFIX = "project_step_fuunction"
+PROJECT_PREFIX = args["PROJECT_PREFIX"]
 
 RAW_TRIPS_PATH = f"s3://{BUCKET}/{PROJECT_PREFIX}/raw/yellow_trips/"
 RAW_ZONES_PATH = f"s3://{BUCKET}/{PROJECT_PREFIX}/raw/taxi_zone_lookup/"
